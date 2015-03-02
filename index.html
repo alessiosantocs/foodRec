@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>FoodRec</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="http://i.imgur.com/HhCGwM7.jpg" class="img-responsive thumbnail"/>
+    </div>
+    <div class="col-sm-8">
+      <h1>Recognition test</h1>
+      <p>I am testing this image over here. Goals:</p>
+      <ul>
+        <li>Recognize what kind of food and ingredients are/should be there</li>
+        <li>Show the knowledge of the system in terms of food (salads :D)</li>
+        <li>Make a rough estimation of carbs count</li>
+      </ul>
+      <textarea id="json_input" class="hidden">
+        {"files": [{"status": "OK", "name": "Aj_YhWlOPiLY2GhHoIKXH6FmMJKVWP89DXycaJDhjPml.jpg", "predicted_classes": ["vegetable", "food", "salad", "lettuce", "produce", "dinner", "bowl", "appetizer", "plate", "meal"], "timestamp": 1424775213425, "delete_type": "POST", "predicted_probs": ["0.051", "0.047", "0.031", "0.030", "0.026", "0.019", "0.019", "0.017", "0.017", "0.016"], "time": "73 ms", "error": [], "size": 123232, "nearest_urls": ["https://s3.amazonaws.com/clarifai-img/demo/104/104947832.jpg", "https://s3.amazonaws.com/clarifai-img/demo/553/55375213.jpg", "https://s3.amazonaws.com/clarifai-img/demo/379/37928446.jpg", "https://s3.amazonaws.com/clarifai-img/demo/130/130154900.jpg", "https://s3.amazonaws.com/clarifai-img/demo/120/120411148.jpg", "https://s3.amazonaws.com/clarifai-img/demo/629/62971261.jpg", "https://s3.amazonaws.com/clarifai-img/demo/386/38647183.jpg", "https://s3.amazonaws.com/clarifai-img/demo/545/54534520.jpg", "https://s3.amazonaws.com/clarifai-img/demo/187/18797302.jpg", "https://s3.amazonaws.com/clarifai-img/demo/115/115782445.jpg", "https://s3.amazonaws.com/clarifai-img/demo/110/110159798.jpg", "https://s3.amazonaws.com/clarifai-img/demo/124/12450772.jpg"]}]}
+      </textarea>
+      <button id="proceed" class="btn btn-primary btn-large">Go for it</button>
+      <br><br>
+      <pre id="output" style="max-height: 400px;"></pre>
+
+    </div>
+  </div>
+
+
+  <script src="main.js"></script>
+</body>
+</html>
