@@ -12,9 +12,9 @@
   <br><br>
   <div class="row">
     <div class="col-sm-4">
-      <!-- <img src="http://i.imgur.com/HhCGwM7.jpg" class="img-responsive thumbnail"/> -->
-      <img src="https://cdn.eyeem.com/thumb/1450/1450/c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399" class="img-responsive thumbnail"/>
-      <textarea id="json_input" style="display: block; width: 100%; min-width: 100%; max-width: 100%;" class="">{"files": [{"status": "OK", "name": "c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399.jpeg", "predicted_classes": ["dinner", "food", "lunch", "dish", "chicken", "vegetable", "traditional", "delicious", "bowl", "meal"], "timestamp": 1425307486880, "delete_type": "POST", "predicted_probs": ["0.042", "0.029", "0.023", "0.022", "0.022", "0.021", "0.021", "0.019", "0.019", "0.019"], "time": "67 ms", "error": [], "size": 226251}]}
+      <img src="http://i.imgur.com/HhCGwM7.jpg" class="img-responsive thumbnail"/>
+      <!-- <img src="https://cdn.eyeem.com/thumb/1450/1450/c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399" class="img-responsive thumbnail"/> -->
+      <textarea id="json_input" style="display: block; width: 100%; min-width: 100%; max-width: 100%;" class="">{"files": [{"status": "OK", "name": "ef73eec09202d6a20757a5ef632d9f966b7ac843-1424269075.jpeg", "predicted_classes": ["dinner", "vegetable", "food", "bowl", "lunch", "cooking", "dish", "health", "meal", "appetizer"], "timestamp": 1425307275653, "delete_type": "POST", "predicted_probs": ["0.049", "0.045", "0.032", "0.032", "0.026", "0.024", "0.022", "0.022", "0.021", "0.020"], "time": "56 ms", "error": [], "size": 85875, "nearest_urls": ["https://s3.amazonaws.com/clarifai-img/demo/131/13135537.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108385976.jpg", "https://s3.amazonaws.com/clarifai-img/demo/543/54335317.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108755138.jpg", "https://s3.amazonaws.com/clarifai-img/demo/646/64624279.jpg", "https://s3.amazonaws.com/clarifai-img/demo/891/89102113.jpg", "https://s3.amazonaws.com/clarifai-img/demo/353/35309833.jpg", "https://s3.amazonaws.com/clarifai-img/demo/332/33215131.jpg", "https://s3.amazonaws.com/clarifai-img/demo/643/64370752.jpg", "https://s3.amazonaws.com/clarifai-img/demo/862/86217340.jpg", "https://s3.amazonaws.com/clarifai-img/demo/140/140815006.jpg", "https://s3.amazonaws.com/clarifai-img/demo/435/43510117.jpg"]}]}
       </textarea>
     </div>
     <div class="col-sm-8">
@@ -35,47 +35,67 @@
 
   <br><br>
 
-  <div class="page-header">
-    <h2>The theory</h2>
-  </div>
+  <h2 id="the-theory">The theory</h2>
 
-  <h4>Learning how food is prepared</h4>
-  <p>
-    A prerogative of this system is how getting it to know and more importantly understand how food is prepared. It's not just recognizing sliced tomatoes from salame is knowing what should be there in a dish withouth even looking at it.
-  </p>
-  <p>Let me explain.</p>
-  <br>
+  <p><strong>Image recognition</strong> <br>
+  <strong>+ Food knowledge</strong> <br>
+  <strong>+ User behaviour and direct input</strong>  <br>
+  <strong>= Carbs counting</strong> (through food recognition)</p>
 
-  <h5>Deep learning algorithms</h5>
-  <p>
-    The system should be able to learn from users' input data how food is prepared. A salad is not just a bunch of green leaves and some tomatoes.
-    The way a salad is presented and prepared (the balance among ingredients) should strongly impact the system's ability to choose between a sliced mushroom and olives when trying to guess the ingredients.
-  </p>
 
-  <h5>Precise ingredients training data</h5>
-  <p>
-    Kale has many forms and nutrition aspects depending on how it is cooked. You usually put chopped kale in a salad (boiled, roasted or fresh). The system should be fed/be able to feed itself with training data about the miriad of forms that food has when it gets cooked/chopped/sliced/etc...
-  </p>
 
-  <br>
-  <h4>Guessing from a first look</h4>
-  <p>
-    Many things carbs and calories are there? Good question. The solution I am proposing not only uses deep learning algorithms and precise knowledge about food but tries to identify tags about the entire meal.
-    E.g. as a rule of thumb a meal which has amongst its tags the word <i>colorful</i> is more likely to be healthier than another just because of its variety. This shall not be used as the only method to estimate meal nutritional properties but as a fine tuner of a previous more precise estimation.
-  </p>
-  <br>
+  <h4 id="image-recognition">Image recognition</h4>
 
-  <h4>Why is nobody able to do food recognition?</h4>
-  <p>
-    There is no API that is focusing specifically on food out there. In addition no one is currently trying to build a digital version of Jamie Oliver.
-    What I am talking about is in its essence an algorithm that gradually learns from the final users how to cook a meal and make decisions about what to add and what not.
+  <p>Image recognition specifically designed for food and ingredients recognition. It should be able to receive inputs and improve over time. The output should be a list of tags and ingredients.  <br>
+  The ability to perform recognition looking for suggested items is crucial.</p>
 
-    Only uniting image recognition, food preparation & nutrition knowledge and home chefs' input will we be able to build such thing.
-  </p>
+  <h4 id="food-knowledge">Food knowledge</h4>
 
+  <p>A prerogative of a system like this is to know how to prepare meals and in general how ingredients are treated and prepared. <br>
+  Think of it as a digital chef.</p>
+
+  <h5 id="meal-composition-knowledge">Meal composition knowledge</h5>
+
+  <p>The system learns how meals are composed. It knows the many different ways to build salads for example, to prepare Chicken curry and why not desserts.</p>
+
+  <p>The learning algorithm is designed to learn how to compose meals over time based on training data and user input data.</p>
+
+  <h5 id="ingredients-preparation-knowledge">Ingredients preparation knowledge</h5>
+
+  <p>Same important as the meal composition knowledge is the part related to how ingredients can actually be prepared and what they look like alone. <br>
+  Think of carrots: they can be made Julienne style or finely chopped or sliced in circles. They can be left raw or boiled. Yet every preparation makes our carrots look different.</p>
+
+  <p>As a good chef knows what julienne carrots look like so has this system. It is essential for increasing the chances of ingredients recognition. </p>
+
+  <h5 id="why-is-food-knowledge-so-important">Why is food knowledge so important?</h5>
+
+  <p>Because through constant communication with the image recognition system it could significantly narrow down the search for - let’s say - specific ingredients in a salad.</p>
+
+  <p>E.g. The image recognition system recognises a food as a salad. It says that the salad contains lettuce and strawberries. <br>
+  The food knowledge part is needed to repeat the search looking for ingredients usually present in salads with lettuce and strawberries and also for ingredients that are usually contained in salads - such as proteins. Repeating the search looking for specific objects would increase the probability of finding the correct match for those items that were unrecognised.</p>
+
+
+
+  <h4 id="user-data">User data</h4>
+
+  <p>Solving a complex problem like this requires to</p>
+
+  <h4 id="guessing-from-a-first-look-wip">Guessing from a first look (WIP)</h4>
+
+  <p>Many things carbs and calories are there? Good question. The solution I am proposing not only uses deep learning algorithms and precise knowledge about food but tries to identify tags about the entire meal. <br>
+  E.g. as a rule of thumb a meal which has amongst its tags the word <em>colorful</em> is more likely to be healthier than another just because of its variety. This shall not be used as the only method to estimate meal nutritional properties but as a fine tuner of a previous more precise estimation.</p>
+
+  <h4 id="why-is-nobody-able-to-do-food-recognition">Why is nobody able to do food recognition?</h4>
+
+  <p>There is no API that is focusing specifically on food out there. In addition no one is currently trying to build a digital version of Jamie Oliver. <br>
+  What I am talking about is in its essence an algorithm that gradually learns from the final users how to cook a meal and make decisions about what to add and what not.</p>
+
+  <p>Only uniting image recognition, food preparation &amp; nutrition knowledge and home chefs’ input will we be able to build such thing.</p>
+
+  
   <script src="main.js"></script>
 </body>
 </html>
 
 
-<!-- {"files": [{"status": "OK", "name": "ef73eec09202d6a20757a5ef632d9f966b7ac843-1424269075.jpeg", "predicted_classes": ["dinner", "vegetable", "food", "bowl", "lunch", "cooking", "dish", "health", "meal", "appetizer"], "timestamp": 1425307275653, "delete_type": "POST", "predicted_probs": ["0.049", "0.045", "0.032", "0.032", "0.026", "0.024", "0.022", "0.022", "0.021", "0.020"], "time": "56 ms", "error": [], "size": 85875, "nearest_urls": ["https://s3.amazonaws.com/clarifai-img/demo/131/13135537.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108385976.jpg", "https://s3.amazonaws.com/clarifai-img/demo/543/54335317.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108755138.jpg", "https://s3.amazonaws.com/clarifai-img/demo/646/64624279.jpg", "https://s3.amazonaws.com/clarifai-img/demo/891/89102113.jpg", "https://s3.amazonaws.com/clarifai-img/demo/353/35309833.jpg", "https://s3.amazonaws.com/clarifai-img/demo/332/33215131.jpg", "https://s3.amazonaws.com/clarifai-img/demo/643/64370752.jpg", "https://s3.amazonaws.com/clarifai-img/demo/862/86217340.jpg", "https://s3.amazonaws.com/clarifai-img/demo/140/140815006.jpg", "https://s3.amazonaws.com/clarifai-img/demo/435/43510117.jpg"]}]} -->
+<!-- {"files": [{"status": "OK", "name": "c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399.jpeg", "predicted_classes": ["dinner", "food", "lunch", "dish", "chicken", "vegetable", "traditional", "delicious", "bowl", "meal"], "timestamp": 1425307486880, "delete_type": "POST", "predicted_probs": ["0.042", "0.029", "0.023", "0.022", "0.022", "0.021", "0.021", "0.019", "0.019", "0.019"], "time": "67 ms", "error": [], "size": 226251}]} -->
