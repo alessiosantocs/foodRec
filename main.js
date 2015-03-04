@@ -51,7 +51,9 @@ var Calculator = function(){
       {name: "carrot", carbs: 41}
     ]},
     {name: "fish", carbs: 0},
-    {name: "meat", carbs: 0},
+    {name: "meat", carbs: 0, children: [
+      {name: "chicken", carbs: 0}
+    ]},
     {name: "legume", carbs: -1, children: [
       {name: "white bean", carbs: 45-11}
     ]},
@@ -60,7 +62,6 @@ var Calculator = function(){
     ]},
     {name: "fruit", carbs: 80}
   ];
-  self.known_ingredients = known_ingredients;
 
   // Shoot an intuition of what the plate is based on the tags
   var _searchCategoryForTagsMatch = function(tags){
@@ -75,12 +76,28 @@ var Calculator = function(){
     var categories_array = [];
     for(var i = 0; i < known_categories.length; i++){
       var category = known_categories[i];
+      var should_add_category = false;
+      var category_intuition_tags_found_count = 0;
       for(var j=0; j < tags.length; j++){
         var tag = tags[j];
 
         if(category.name == tag){
-          categories_array.push(category);
+          should_add_category = true;
         }
+        // let's see if I can guess the category through intuition tags
+        else{
+          // take every tag you can get and
+          if(category.intuition_tags.indexOf(tag) >= 0){
+            category_intuition_tags_found_count++;
+          }
+        }
+      }
+
+      if(category_intuition_tags_found_count >= 3)
+        should_add_category = true;
+
+      if(should_add_category){
+        categories_array.push(category);
       }
     }
 
@@ -144,12 +161,17 @@ var Calculator = function(){
         var ingredient = ingredients[j];
 
         // check if this ingredient is in the list of required ones
-        for(var z = 0; z < should_contain_at_least_one_of_ids.length; z++){
-          var at_least_one_item = _getItem("ingredient", should_contain_at_least_one_of_ids[z]);
+        // for(var z = 0; z < should_contain_at_least_one_of_ids.length; z++){
+        //   var at_least_one_item = _getItem("ingredient", should_contain_at_least_one_of_ids[z]);
+        //
+        //   if(ingredient.name == at_least_one_item.name){
+        //     should_require_all = false;
+        //   }
+        // }
 
-          if(ingredient.name == at_least_one_item.name){
-            should_require_all = false;
-          }
+        // if you can find the ingredient
+        if(_getItem("ingredient", ingredient.name) !== null){
+          should_require_all = false;
         }
       }
 
@@ -165,7 +187,7 @@ var Calculator = function(){
   };
 
   var recognizeIngredients = function(categories, tags){
-    var response = {ingredients: [], missing_ingredients: [], suggested_ingredients: []};
+    var response = {ingredients: [], missing_ingredients: {}, suggested_ingredients: []};
 
     // Missing ingredients part
     /*var required_ingredients = [];
@@ -194,14 +216,21 @@ var Calculator = function(){
 
     var categories = recognizeCategories(recognition_tags);
 
+    if(categories.length == []){
+      screenLog("This is a food something I don't know yet (I only know: [" + known_categories.map(function(el){return el.name;}) + "] and that's it). I may need to study a bit");
+      return false;
+    }
+
     var ingredients = recognizeIngredients(categories, recognition_tags);
 
     screenLog("From a first look it should be: " + categories.map(function(el){return el.name}).join(","));
     screenLog("usually composed of: " +  categories.map(function(cat){
       return cat.contains_at_least_ids.map(function(ing){return ing + "*"}) + ", " + cat.should_contain_at_least_one_of_ids.join(" or ") + ", " + cat.could_contain_ids
-    }))
-    screenLog("At first look it seems to be composed of: " + ingredients.ingredients.map(function(el){return el.name;}))
-    screenLog("I am probably missing or the user didn't add: " + JSON.stringify(ingredients.missing_ingredients))
+    }));
+    screenLog("At first look it seems to be composed of: " + ingredients.ingredients.map(function(el){return el.name;}));
+    screenLog("I am probably missing or you didn't add: " + JSON.stringify(ingredients.missing_ingredients));
+
+    return true;
   };
 };
 
@@ -219,20 +248,22 @@ button.onclick = function(event){
   }, 1000);
 
   window.setTimeout(function(){
-    calculator.run(json);
+
+    if(calculator.run(json)){
+      window.setTimeout(function(){
+        screenLog("Fake: repeating image recognition looking for proteins in salad!");
+      }, 2000);
+
+      window.setTimeout(function(){
+        screenLog("Fake: Here we go! I've found some cheese in there (mozzarella) and fish (tuna fish)");
+      }, 3000);
+
+      window.setTimeout(function(){
+        screenLog("Fake: Hey, did you add some fruit or nuts in your salad? (YES/NO)");
+      }, 5000);
+    }
+
   }, 3000);
-
-  window.setTimeout(function(){
-    screenLog("Fake: repeating image recognition looking for proteins in salad!");
-  }, 5000);
-
-  window.setTimeout(function(){
-    screenLog("Fake: Here we go! I've found some cheese in there (mozzarella) and fish (tuna fish)");
-  }, 6000);
-
-  window.setTimeout(function(){
-    screenLog("Fake: Hey, did you add some fruit or nuts in your salad? (YES/NO)");
-  }, 7000);
 
 
 

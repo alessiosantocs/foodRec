@@ -12,7 +12,10 @@
   <br><br>
   <div class="row">
     <div class="col-sm-4">
-      <img src="http://i.imgur.com/HhCGwM7.jpg" class="img-responsive thumbnail"/>
+      <!-- <img src="http://i.imgur.com/HhCGwM7.jpg" class="img-responsive thumbnail"/> -->
+      <img src="https://cdn.eyeem.com/thumb/1450/1450/c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399" class="img-responsive thumbnail"/>
+      <textarea id="json_input" style="display: block; width: 100%; min-width: 100%; max-width: 100%;" class="">{"files": [{"status": "OK", "name": "c80e43f9d1eca785ae49b39b1809ad03ee4e0272-1424269399.jpeg", "predicted_classes": ["dinner", "food", "lunch", "dish", "chicken", "vegetable", "traditional", "delicious", "bowl", "meal"], "timestamp": 1425307486880, "delete_type": "POST", "predicted_probs": ["0.042", "0.029", "0.023", "0.022", "0.022", "0.021", "0.021", "0.019", "0.019", "0.019"], "time": "67 ms", "error": [], "size": 226251}]}
+      </textarea>
     </div>
     <div class="col-sm-8">
       <h1>Recognition test</h1>
@@ -20,11 +23,9 @@
       <ul>
         <li>Recognize what kind of food and ingredients are/should be there</li>
         <li>Show the knowledge of the system in terms of food (salads :D)</li>
-        <li>Make a rough estimation of carbs count</li>
+        <li>Make a rough estimation of carbs count (status: development)</li>
       </ul>
-      <textarea id="json_input" class="hidden">
-        {"files": [{"status": "OK", "name": "Aj_YhWlOPiLY2GhHoIKXH6FmMJKVWP89DXycaJDhjPml.jpg", "predicted_classes": ["vegetable", "food", "salad", "lettuce", "produce", "dinner", "bowl", "appetizer", "plate", "meal"], "timestamp": 1424775213425, "delete_type": "POST", "predicted_probs": ["0.051", "0.047", "0.031", "0.030", "0.026", "0.019", "0.019", "0.017", "0.017", "0.016"], "time": "73 ms", "error": [], "size": 123232, "nearest_urls": ["https://s3.amazonaws.com/clarifai-img/demo/104/104947832.jpg", "https://s3.amazonaws.com/clarifai-img/demo/553/55375213.jpg", "https://s3.amazonaws.com/clarifai-img/demo/379/37928446.jpg", "https://s3.amazonaws.com/clarifai-img/demo/130/130154900.jpg", "https://s3.amazonaws.com/clarifai-img/demo/120/120411148.jpg", "https://s3.amazonaws.com/clarifai-img/demo/629/62971261.jpg", "https://s3.amazonaws.com/clarifai-img/demo/386/38647183.jpg", "https://s3.amazonaws.com/clarifai-img/demo/545/54534520.jpg", "https://s3.amazonaws.com/clarifai-img/demo/187/18797302.jpg", "https://s3.amazonaws.com/clarifai-img/demo/115/115782445.jpg", "https://s3.amazonaws.com/clarifai-img/demo/110/110159798.jpg", "https://s3.amazonaws.com/clarifai-img/demo/124/12450772.jpg"]}]}
-      </textarea>
+
       <button id="proceed" class="btn btn-primary btn-large">Go for it</button>
       <br><br>
       <pre id="output" style="max-height: 400px;"></pre>
@@ -32,7 +33,45 @@
     </div>
   </div>
 
+  <br><br>
+
+  <h2>The theory</h2>
+
+  <h4>Learning how food is prepared</h4>
+  <p>
+    A prerogative of this system is how getting it to know and more importantly understand how food is prepared. It's not just recognizing sliced tomatoes from salame is knowing what should be there in a dish withouth even looking at it.
+  </p>
+  <p>Let me explain.</p>
+
+  <h6>Deep learning algorithms</h6>
+  <p>
+    The system should be able to learn from users' input data how food is prepared. A salad is not just a bunch of green leaves and some tomatoes.
+    The way a salad is presented and prepared (the balance among ingredients) should strongly impact the system's ability to choose between a sliced mushroom and olives when trying to guess the ingredients.
+  </p>
+
+  <h6>Precise ingredients training data</h6>
+  <p>
+    Kale has many forms and nutrition aspects depending on how it is cooked. You usually put chopped kale in a salad (boiled, roasted or fresh). The system should be fed/be able to feed itself with training data about the miriad of forms that food has when it gets cooked/chopped/sliced/etc...
+  </p>
+
+  <h4>Guessing from a first look</h4>
+  <p>
+    Many things carbs and calories are there? Good question. The solution I am proposing not only uses deep learning algorithms and precise knowledge about food but tries to identify tags about the entire meal.
+    E.g. as a rule of thumb a meal which has amongst its tags the word <i>colorful</i> is more likely to be healthier than another just because of its variety. This shall not be used as the only method to estimate meal nutritional properties but as a fine tuner of a previous more precise estimation.
+  </p>
+
+
+  <h4>Why nobody is able to do food recognition?</h4>
+  <p>
+    There is no API that is focusing specifically on food out there. In addition no one is currently trying to build a digital version of Jamie Oliver.
+    What I am talking about is in its essence an algorithm that gradually learns from the final users how to cook a meal and make decisions about what to add and what not.
+
+    Only uniting image recognition, food preparation & nutrition knowledge and home chefs' input will we be able to build such thing.
+  </p>
 
   <script src="main.js"></script>
 </body>
 </html>
+
+
+<!-- {"files": [{"status": "OK", "name": "ef73eec09202d6a20757a5ef632d9f966b7ac843-1424269075.jpeg", "predicted_classes": ["dinner", "vegetable", "food", "bowl", "lunch", "cooking", "dish", "health", "meal", "appetizer"], "timestamp": 1425307275653, "delete_type": "POST", "predicted_probs": ["0.049", "0.045", "0.032", "0.032", "0.026", "0.024", "0.022", "0.022", "0.021", "0.020"], "time": "56 ms", "error": [], "size": 85875, "nearest_urls": ["https://s3.amazonaws.com/clarifai-img/demo/131/13135537.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108385976.jpg", "https://s3.amazonaws.com/clarifai-img/demo/543/54335317.jpg", "https://s3.amazonaws.com/clarifai-img/demo/108/108755138.jpg", "https://s3.amazonaws.com/clarifai-img/demo/646/64624279.jpg", "https://s3.amazonaws.com/clarifai-img/demo/891/89102113.jpg", "https://s3.amazonaws.com/clarifai-img/demo/353/35309833.jpg", "https://s3.amazonaws.com/clarifai-img/demo/332/33215131.jpg", "https://s3.amazonaws.com/clarifai-img/demo/643/64370752.jpg", "https://s3.amazonaws.com/clarifai-img/demo/862/86217340.jpg", "https://s3.amazonaws.com/clarifai-img/demo/140/140815006.jpg", "https://s3.amazonaws.com/clarifai-img/demo/435/43510117.jpg"]}]} -->
